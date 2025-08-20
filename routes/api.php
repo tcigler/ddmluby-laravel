@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-const KEY_HASH="ad490e47a66386a3082ec1f8fa126da3e6f13db22f0c95dde423f3a1f884b9ad";
-const ADMIN_PASS_HASH="$2y$12$2j.KBAwPP2GKHNm9wG4WNOUVkA6P2UfWRux8asgO9Kt.s8CSDCQmu";
+const KEY_HASH="20cbdcfcc66c2b3fd94557f785f6448001f057db96a14b111c5757cc4b211b32";
+const ADMIN_PASS_HASH='$2y$12$NbOhlvu6nRWsl.jUdj/iX.tE9fKMRAtnIOdzRpuUdN7JRoRWR7Lve';
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -49,7 +50,7 @@ Route::get('/run-migrations', function (Request $request) {
             if($admin == "true") {
                 $user = new User();
                 $user->name = "Admin";
-                $user->email = "admin";
+                $user->email = "admin@ddmluby.cz";
 
                 // Disable the hashed cast temporarily
                 $user->mergeCasts([
