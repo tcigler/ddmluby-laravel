@@ -1,0 +1,85 @@
+name: _reusable
+
+# Controls when the workflow will run
+on:
+  workflow_call:
+    inputs:
+      environmentName:
+        required: true
+        type: string
+      DEBUG:
+        type: boolean
+        default: false
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-24.04
+
+    environment:
+      name: ${{ inputs.environmentName }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: Fill main DB cred
+        uses: falnyr/replace-env-vars-action@v1.3.2
+        with:
+          filename: env.template
+        env:
+          APP_KEY: ${{ secrets.APP_KEY }}
+          DB_MAIN_USER: ${{ vars.DB_MAIN_USER }}
+          DB_MAIN_USER_PASS: ${{ secrets.DB_MAIN_USER_PASS }}
+          DB_MAIN_ADMIN: ${{ vars.DB_MAIN_ADMIN }}
+          DB_MAIN_ADMIN_PASS: ${{ secrets.DB_MAIN_ADMIN_PASS }}
+          DB_MAIN_NAME: ${{ vars.DB_MAIN_NAME }}
+          DB_MAIN_SERVER: ${{ vars.DB_MAIN_SERVER }}
+          DEBUG: ${{ inputs.DEBUG }}
+          URL: ${{ vars.URL }}
+          MAIL_USERNAME: ${{ vars.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+#          CKEDITOR_LICENSE_KEY: ${{ secrets.CKEDITOR_LICENSE_KEY }}
+
+      - name: Create .env file
+        run: mv env.template .env
+
+      - name: Setup PHP with PECL extension
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: npm install
+        run: npm install
+
+      - name: npm install
+        run: npm run build
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          # ftp server
+          server: ${{ vars.FTP_SERVER }}
+          # ftp username
+          username: ${{ vars.FTP_USER }}
+          # ftp password
+          password: ${{ secrets.FTP_PASS }}
+          # Path to upload to on the server. Must end with trailing slash /
+          server-dir: ${{ vars.FTP_DIR }}/
+
