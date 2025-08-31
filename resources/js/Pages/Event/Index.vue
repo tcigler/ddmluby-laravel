@@ -11,12 +11,9 @@ defineProps({
 
 <template>
     <DataTable :value="events">
-        <Column field="title" header="Title"></Column>
-        <Column field="description" header="Description"></Column>
+        <Column field="title" header="Akce"></Column>
         <Column field="location" header="Místo"></Column>
-        <Column field="program" header="Program"></Column>
-        <Column field="show_from" header="Show from"></Column>
-        <Column header="Start" field="start">
+        <Column header="Začátek" field="start">
             <template #body="slotProps">
                 {{ dayjs(slotProps.data.start).format("DD. MM. YYYY, HH:mm") }}
             </template>
@@ -32,8 +29,6 @@ defineProps({
             </template>
         </Column>
     </DataTable>
-
-
 </template>
 
 <style scoped>

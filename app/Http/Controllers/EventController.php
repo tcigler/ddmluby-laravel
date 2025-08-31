@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class EventController extends Controller {
@@ -12,7 +13,9 @@ class EventController extends Controller {
     public function index() {
         $this->authorize('viewAny', Event::class);
 
-        return inertia('Event/Index', ["events" => Event::all()]);
+        $events = Event::where("show_from", "<", Carbon::now())->get();
+
+        return inertia('Event/Index', ["events" => $events]);
     }
 
     public function store(EventRequest $request) {
@@ -23,6 +26,7 @@ class EventController extends Controller {
 
     public function show(Event $event) {
         $this->authorize('view', $event);
+
 
         return inertia('Event/Show', ["event" => $event, "hasTimeSlots" => $event->timeSlots()->exists()]);
     }

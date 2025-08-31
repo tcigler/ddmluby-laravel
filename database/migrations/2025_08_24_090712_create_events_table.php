@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->text('program')->nullable();
             $table->dateTime('start');
             $table->dateTime('end')->nullable();
-            $table->dateTime('show_from');
+            $table->timestamp('show_from');
+            $table->timestamp('reservation_from')->nullable();
             $table->boolean('reservation_open');
             $table->timestamps();
             $table->softDeletes();

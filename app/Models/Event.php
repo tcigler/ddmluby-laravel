@@ -25,11 +25,15 @@ class Event extends Model {
         return $this->hasMany(EventTimeSlot::class);
     }
 
+    protected $dates = [
+        "start",
+        "end",
+        "show_from",
+        "reservation_from"
+    ];
+
     protected function casts(): array {
         return [
-            'start' => 'datetime',
-            'end' => 'datetime',
-            'show_from' => 'datetime',
             'reservation_open' => 'boolean',
         ];
     }

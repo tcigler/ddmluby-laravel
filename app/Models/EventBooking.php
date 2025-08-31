@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class EventBooking extends Model {
@@ -24,8 +23,8 @@ class EventBooking extends Model {
         return $this->belongsTo(EventTimeSlot::class);
     }
 
-    public function userInfo(): HasOne {
-        return $this->hasOne(UserInfo::class);
+    public function userInfo(): BelongsTo {
+        return $this->belongsTo(UserInfo::class);
     }
 
     protected function casts(): array {

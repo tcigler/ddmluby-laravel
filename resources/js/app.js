@@ -1,14 +1,15 @@
 import './bootstrap';
 import '../css/app.css';
 
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { ZiggyVue } from 'ziggy-js';
+import {createApp, h} from 'vue';
+import {createInertiaApp} from '@inertiajs/vue3';
+import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
+import {ZiggyVue} from 'ziggy-js';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import {definePreset} from "@primeuix/themes";
+import Tooltip from 'primevue/tooltip';
 
 import dayjs from "dayjs";
 import "dayjs/locale/cs"
@@ -114,6 +115,7 @@ createInertiaApp({
                     }
                 }
             })
+            .directive('tooltip', Tooltip)
             .mount(el);
     },
     progress: {

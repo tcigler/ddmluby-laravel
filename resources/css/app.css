@@ -14,11 +14,46 @@
 
 @layer base {
     h1 {
-        font-size: var(--text-2xl);
+        @apply text-2xl font-bold mb-2
     }
     h2 {
-        font-size: var(--text-xl);
+        @apply text-xl mt-2 mb-1
     }
 
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:hover.p-button, nav a:hover {
+        text-decoration: none;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply bg-primary-600 dark:bg-primary-800 text-white font-medium rounded-md p-2.5 items-center justify-center inline-flex ;
+        transition: background-color 0.1s ease-in-out;
+    }
+
+    .btn:hover {
+        @apply bg-primary-500 dark:bg-primary-900;
+        text-decoration: none;
+    }
+
+    .btn-red {
+        @apply bg-red-700 dark:bg-red-800;
+    }
+
+    .btn-red:hover {
+        @apply bg-red-600 dark:bg-red-700;
+    }
+
+    .btn-green {
+        @apply bg-green-700 dark:bg-green-800;
+    }
+
+    .btn-green:hover {
+        @apply bg-green-600 dark:bg-green-700;
+    }
 }
 

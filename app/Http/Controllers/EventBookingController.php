@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class EventBookingController extends Controller {
     use AuthorizesRequests;
@@ -81,28 +80,25 @@ class EventBookingController extends Controller {
             }
         });
 
+        return redirect()->route("booking.show", $eventBooking->uuid)
+            ->banner("Rezervace úspěšně vytvořena");
 
     }
 
-    public function show(Event $event, Request $request) {
+    public function show(Request $request) {
 
         $bookingUUID = null;
 
-
         if(Str::isUuid($request->booking)) {
             $bookingUUID = $request->booking;
-        } else if($request->session()->get("booking_uuid") !== null) {
-            $bookingUUID = $request->session()->get("booking_uuid");
-            $bookingID = $request->booking;
+//        } else if($request->session()->get("booking_uuid") !== null) {
+//            $bookingUUID = $request->session()->get("booking_uuid");
+//            $bookingID = $request->booking;
         } else {
             abort(404);
         }
 
-        if(isset($bookingID)) {
-            $eventBooking = EventBooking::where("uuid", $bookingUUID)->findOrFail($bookingID);
-        } else {
-            $eventBooking = EventBooking::where("uuid", $bookingUUID)->firstOrFail();
-        }
+        $eventBooking = EventBooking::where("uuid", $bookingUUID)->with("eventTimeSlot", "eventTimeSlot.event", "userInfo")->firstOrFail();
 
         $this->authorize('view', $eventBooking);
 
@@ -117,12 +113,14 @@ class EventBookingController extends Controller {
         return $eventBooking;
     }
 
-    public function destroy(EventBooking $eventBooking) {
+    public function destroy(string $booking_uuid) {
+        $eventBooking = EventBooking::where("uuid", $booking_uuid)->firstOrFail();
+
         $this->authorize('delete', $eventBooking);
 
         $eventBooking->delete();
 
-        return response()->json();
+        return redirect()->route("events.index")->banner("Vaše rezervace byla úspěšně zrušena");
     }
 
     /**
