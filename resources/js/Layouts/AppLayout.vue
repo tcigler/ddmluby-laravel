@@ -1,12 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
-import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 defineProps({
     title: String,
@@ -29,19 +24,19 @@ const logout = () => {
 
 <template>
     <div class="bg-surface-200 min-h-screen">
-        <div class="container bg-primary-300 mx-auto">
-            <Head :title="title" />
+        <div class="container bg-primary-100 mx-auto">
+            <Head :title="title || 'Registrace'" />
 
             <nav class="flex gap-4 bg-primary-600 text-gray-100 [&>*]:p-2 [&>*]:hover:bg-primary-500">
                 <Link :href="route('home')">Domů</Link>
-                <div>Akce</div>
-                <div>Novinky</div>
+<!--                <Link :href="route('events.index')">Akce</Link>-->
+                <Link :href="route('akce')">Akce</Link>
             </nav>
 
             <Banner />
 
             <!-- Page Content -->
-            <main>
+            <main class="p-2">
                 <slot />
             </main>
         </div>

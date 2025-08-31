@@ -10,6 +10,15 @@ import Aura from '@primeuix/themes/aura';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import {definePreset} from "@primeuix/themes";
 
+import dayjs from "dayjs";
+import "dayjs/locale/cs"
+import localeData from 'dayjs/plugin/localeData'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(localeData);
+dayjs.extend(localizedFormat);
+dayjs.locale("cs")
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 const MyPreset = definePreset(Aura, {

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EventBookingController;
+use App\Http\Controllers\EventController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -12,6 +14,12 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
+
+Route::resource("events", EventController::class)->only(['index', 'show']);
+Route::resource("events.booking", EventBookingController::class)->only(['show', 'create', 'store']);
+
+Route::get("akce", function () {return Inertia::render('Event/Tmp');})->name('akce');
+Route::get("akce/pohadkovy-les", function () {return Inertia::render('Event/TmpLes');})->name('akce.pohadkovy-les');
 
 Route::middleware([
     'auth:sanctum',
