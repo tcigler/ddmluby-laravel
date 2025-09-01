@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-import dayjs from "dayjs";
-import {Link} from "@inertiajs/vue3";
-
 </script>
 
 <template>

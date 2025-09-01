@@ -1,6 +1,6 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import {ref, watchEffect} from 'vue';
+import {usePage} from '@inertiajs/vue3';
 
 const page = usePage();
 const show = ref(true);
@@ -16,9 +16,10 @@ watchEffect(async () => {
 
 <template>
     <div>
-        <div v-if="show && message" :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger' }">
-            <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between flex-wrap">
+      <div v-if="show && message" class="my-2">
+        <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8 rounded-lg"
+             :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger' }">
+          <div class="flex items-center justify-between flex-wrap">
                     <div class="w-0 flex-1 flex items-center min-w-0">
                         <span class="flex p-2 rounded-lg" :class="{ 'bg-indigo-600': style == 'success', 'bg-red-600': style == 'danger' }">
                             <svg v-if="style == 'success'" class="size-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

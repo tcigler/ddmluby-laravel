@@ -1,0 +1,49 @@
+<script setup>
+
+</script>
+
+<template>
+
+    <div class="wrapper">
+        <div class="content">
+            <slot/>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+/* Set content to fill the entire A4 page */
+.wrapper {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style content with shaded background */
+.content {
+    width: 95%;
+    /* Adjust the width as needed */
+    height: 95%;
+    /* Adjust the height as needed*/
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+</style>

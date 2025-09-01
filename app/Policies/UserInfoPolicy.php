@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class BookingInfoPolicy {
+class UserInfoPolicy {
     use HandlesAuthorization;
 
     public function viewAny(?User $user): bool {

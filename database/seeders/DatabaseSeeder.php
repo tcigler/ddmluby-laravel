@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserInfo;
 use App\Models\Event;
 use App\Models\EventBooking;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Event::factory()->count(10)->create();
+        Event::factory()->count(20)->create();
         EventBooking::factory()->count(30)->addAttendees()->create();
     }
 }

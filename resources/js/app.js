@@ -1,19 +1,21 @@
 import './bootstrap';
 import '../css/app.css';
 
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { ZiggyVue } from 'ziggy-js';
+import {createApp, h} from 'vue';
+import {createInertiaApp} from '@inertiajs/vue3';
+import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
+import {ZiggyVue} from 'ziggy-js';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import {definePreset} from "@primeuix/themes";
+import Tooltip from 'primevue/tooltip';
 
 import dayjs from "dayjs";
 import "dayjs/locale/cs"
 import localeData from 'dayjs/plugin/localeData'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 dayjs.extend(localeData);
 dayjs.extend(localizedFormat);
@@ -93,7 +95,7 @@ createInertiaApp({
     resolve: (name) => {
         const page = resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue'))
         page.then((module) => {
-            let defaultLayout = AppLayout; // (name.startsWith("Admin/")) ? AdminLayout : AppLayout
+            let defaultLayout = (name.startsWith("Admin/")) ? AdminLayout : AppLayout; // (name.startsWith("Admin/")) ? AdminLayout : AppLayout
             module.default.layout = module.default.layout || defaultLayout;
         });
         return page;
@@ -114,6 +116,7 @@ createInertiaApp({
                     }
                 }
             })
+            .directive('tooltip', Tooltip)
             .mount(el);
     },
     progress: {

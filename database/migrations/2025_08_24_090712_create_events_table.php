@@ -14,10 +14,11 @@ return new class extends Migration {
             $table->text('program')->nullable();
             $table->dateTime('start');
             $table->dateTime('end')->nullable();
-            $table->dateTime('show_from');
-            $table->boolean('reservation_open');
+            $table->timestamp('show_from');
+            $table->timestamp('registration_from')->nullable();
+            $table->boolean('registration_open');
+            $table->string('slug')->unique()->index();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

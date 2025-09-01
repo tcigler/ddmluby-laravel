@@ -17,8 +17,9 @@ class EventFactory extends Factory {
             'program' => $this->faker->optional()->text(),
             'start' => fake()->dateTimeBetween('-1 month', '+6 months'),
             'end' => fake()->dateTimeBetween('+6 month', '+7 months'),
-            'show_from' => fake()->dateTimeBetween('-1 month', '+5 days'),
-            'reservation_open' => $this->faker->boolean(),
+            'show_from' => fake()->dateTimeBetween('-1 month', '+10 days'),
+            'registration_from' => fake()->optional()->dateTimeBetween('-15 days', '+3 days'),
+            'registration_open' => $this->faker->boolean(70),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
+import {ref} from 'vue';
+import {Head, Link, router} from '@inertiajs/vue3';
 import Banner from '@/Components/Banner.vue';
 
 defineProps({
@@ -29,14 +29,13 @@ const logout = () => {
 
             <nav class="flex gap-4 bg-primary-600 text-gray-100 [&>*]:p-2 [&>*]:hover:bg-primary-500">
                 <Link :href="route('home')">Domů</Link>
-<!--                <Link :href="route('events.index')">T</Link>-->
-                <Link :href="route('akce')">Akce</Link>
+                <Link :href="route('events.index')">Akce</Link>
+                <!--                <Link :href="route('akce')">Akce</Link>-->
             </nav>
-
-            <Banner />
 
             <!-- Page Content -->
             <main class="p-2 dark:text-gray-200 dark:bg-primary-800">
+              <Banner/>
                 <slot />
             </main>
         </div>

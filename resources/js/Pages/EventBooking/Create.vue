@@ -2,7 +2,7 @@
 import {useForm} from "@inertiajs/vue3";
 import Button from "primevue/button";
 import dayjs from "dayjs";
-import {computed, ref, watch} from "vue";
+import {ref, watch} from "vue";
 
 const props = defineProps({
     event: Object,

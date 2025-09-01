@@ -11,7 +11,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->text('note')->nullable();
+            $table->string('verification_code')->nullable();
+            $table->timestamp('verified_at')->nullable();
             $table->timestamps();
         });
     }
