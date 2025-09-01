@@ -5,7 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class UserInfo extends Model {
@@ -17,8 +17,8 @@ class UserInfo extends Model {
 
     protected $dates = ['verified_at'];
 
-    public function eventBooking(): HasMany {
-        return $this->hasMany(EventBooking::class);
+    public function eventBooking(): HasOne {
+        return $this->hasOne(EventBooking::class);
     }
 
     protected $fillable = [

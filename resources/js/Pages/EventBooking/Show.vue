@@ -14,14 +14,16 @@ const userInfo = props.booking.user_info;
     <h1>Vaše registrace na {{ event.title }}</h1>
     <p>Čas: {{ dayjs(booking.event_time_slot.time).format("L, LT") }}</p>
     <p>Místo: {{ event.location }}</p>
-    <p>Vyprší: {{ dayjs(booking.expire_at).format("L, LT") }}&nbsp;<i class="pi pi-question-circle text-gray-500"
-                                                                      v-tooltip.bottom="'Po tomto čase se registrace automaticky zruší'"></i>
+    <p>Počet míst: {{ booking.attendees_count }}</p>
+    <p v-if="booking.expire_at">Vyprší: {{ dayjs(booking.expire_at).format("L, LT") }}&nbsp;
+        <i class="pi pi-question-circle text-gray-500"
+           v-tooltip.bottom="'Po tomto čase se registrace automaticky zruší'"></i>
     </p>
     <div class="flex flex-col gap-2 mt-4">
         <template v-if="userInfo">
             <Message v-if="!userInfo.is_verified" severity="warn">Registrace je zaznamenána, zkontrolujte prosím zadané
                 údaje.<br/>
-                Pro úspěšné potvrzení navštivte odkaz, který přišel na váš e-mail
+                Pro potvrzení registrace navštivte odkaz, který přišel na váš e-mail
             </Message>
             <h2>Údaje k registraci</h2>
             <p>Jméno: {{ userInfo.name }}</p>

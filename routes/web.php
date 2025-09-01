@@ -21,6 +21,8 @@ Route::resource("events.booking", EventBookingController::class)->only(['create'
 Route::resource("booking", EventBookingController::class)->only(['show', 'destroy']);
 Route::resource("user-info", UserInfoController::class)->only(['show', 'create', 'store', 'edit', 'update']);
 
+Route::get("user-info/{user_info}/confirm", [UserInfoController::class, "confirm"])->name("user-info.confirm");
+
 Route::get("akce", function () {return Inertia::render('Event/Tmp');})->name('akce');
 Route::get("akce/pohadkovy-les", function () {return Inertia::render('Event/TmpLes');})->name('akce.pohadkovy-les');
 

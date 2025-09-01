@@ -1,5 +1,5 @@
 <script setup>
-import {useForm} from "@inertiajs/vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 import Button from "primevue/button";
 
 const props = defineProps({
@@ -26,7 +26,8 @@ const form = useForm({
         </FloatLabel>
         <FloatLabel variant="on">
             <label>Email</label>
-            <InputText type="text" name="email" v-model="form.email"/>
+            <InputText type="text" name="email" v-model="form.email" disabled
+                       v-tooltip="'Pro změnu e-mailu vytvořte registraci znovu'"/>
             <p class="text-red-600">{{ form.errors.email }}</p>
         </FloatLabel>
         <FloatLabel variant="on">
@@ -41,6 +42,7 @@ const form = useForm({
         <!--    </FloatLabel>-->
 
         <Button class="mt-2" :disabled="form.processing" type="submit" label="Upravit"/>
+        <Link class="btn btn-yellow" :href="route('booking.show', props.booking_uuid)">Zpět</Link>
     </form>
 </template>
 
