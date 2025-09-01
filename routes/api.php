@@ -16,7 +16,7 @@ Route::get('/db-init', function (Request $request) {
     if(hash('sha256', $key) == KEY_HASH) {
         $user = new User();
         $user->name = "Admin";
-        $user->email = "admin";
+        $user->email = "admin@ddmluby.cz";
         // Disable the hashed cast temporarily
         $user->mergeCasts([
             'password' => 'string', // Treat it as a plain string

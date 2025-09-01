@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\EventBookingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserInfoController;
@@ -30,6 +31,12 @@ Route::resource(__("routes.user-info"), UserInfoController::class)->only(['show'
 
 //Route::get("akce", function () {return Inertia::render('Event/Tmp');})->name('akce');
 //Route::get("akce/pohadkovy-les", function () {return Inertia::render('Event/TmpLes');})->name('akce.pohadkovy-les');
+
+
+Route::prefix('admin')->name('admin.')->middleware("auth")->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/preview-mail', [AdminController::class, 'previewMail'])->name('preview-mail');
+});
 
 Route::middleware([
     'auth:sanctum',

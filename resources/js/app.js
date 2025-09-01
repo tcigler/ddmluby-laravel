@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/cs"
 import localeData from 'dayjs/plugin/localeData'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 dayjs.extend(localeData);
 dayjs.extend(localizedFormat);
@@ -94,7 +95,7 @@ createInertiaApp({
     resolve: (name) => {
         const page = resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue'))
         page.then((module) => {
-            let defaultLayout = AppLayout; // (name.startsWith("Admin/")) ? AdminLayout : AppLayout
+            let defaultLayout = (name.startsWith("Admin/")) ? AdminLayout : AppLayout; // (name.startsWith("Admin/")) ? AdminLayout : AppLayout
             module.default.layout = module.default.layout || defaultLayout;
         });
         return page;
