@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model {
-    use HasFactory, SoftDeletes;
+    use HasFactory, Sluggable, SluggableScopeHelpers;
 
     protected $fillable = [
         'title',
@@ -36,6 +37,19 @@ class Event extends Model {
     protected function casts(): array {
         return [
             'registration_open' => 'boolean',
+        ];
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
         ];
     }
 }

@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->timestamp('show_from');
             $table->timestamp('registration_from')->nullable();
             $table->boolean('registration_open');
+            $table->string('slug')->unique()->index();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -6,6 +6,7 @@ use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 
 class EventController extends Controller {
     use AuthorizesRequests;
@@ -24,7 +25,13 @@ class EventController extends Controller {
         return Event::create($request->validated());
     }
 
-    public function show(Event $event) {
+    public function show(Request $request) {
+        $identifier = $request->event;
+        if (is_numeric($identifier)) {
+            $event = Event::findOrFail($identifier);
+        } else {
+            $event = Event::findBySlugOrFail($identifier);
+        }
         $this->authorize('view', $event);
         return inertia('Event/Show', [
             "event" => $event,

@@ -25,7 +25,8 @@ defineProps({
         </Column>
         <Column field="id" header="Detail" :pt="{bodyCell: 'text-center space-x-4', columnHeaderContent: 'justify-center' }">
             <template #body="slotProps">
-                <Link :href="route('events.show', slotProps.data.id)"><i class="pi pi-eye text-2xl text-primary-600"></i></Link>
+                <Link :href="route('events.show', slotProps.data.slug)"><i
+                    class="pi pi-eye text-2xl text-primary-600"></i></Link>
             </template>
         </Column>
     </DataTable>
