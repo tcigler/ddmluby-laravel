@@ -14,7 +14,7 @@ class EventRequest extends FormRequest {
             'start' => ['required', 'date'],
             'end' => ['nullable', 'date'],
             'show_from' => ['required', 'date'],
-            'reservation_open' => ['boolean'],
+            'registration_open' => ['boolean'],
         ];
     }
 

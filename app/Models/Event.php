@@ -18,7 +18,8 @@ class Event extends Model {
         'start',
         'end',
         'show_from',
-        'reservation_open',
+        'registration_from',
+        'registration_open',
     ];
 
     public function timeSlots(): HasMany {
@@ -29,12 +30,12 @@ class Event extends Model {
         "start",
         "end",
         "show_from",
-        "reservation_from"
+        "registration_from"
     ];
 
     protected function casts(): array {
         return [
-            'reservation_open' => 'boolean',
+            'registration_open' => 'boolean',
         ];
     }
 }

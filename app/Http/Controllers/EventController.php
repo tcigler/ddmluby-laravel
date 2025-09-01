@@ -26,9 +26,11 @@ class EventController extends Controller {
 
     public function show(Event $event) {
         $this->authorize('view', $event);
-
-
-        return inertia('Event/Show', ["event" => $event, "hasTimeSlots" => $event->timeSlots()->exists()]);
+        return inertia('Event/Show', [
+            "event" => $event,
+            "can_register" => ($event->timeSlots()->exists() && isset($event->registration_from)),
+            "registration_later" => (isset($event->registration_from) && Carbon::now()->isBefore($event->registration_from)) ? $event->registration_from : null,
+        ]);
     }
 
     public function update(EventRequest $request, Event $event) {

@@ -16,12 +16,13 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get("booking/cleanup", [EventBookingController::class, "cleanup"])->name('booking.cleanup');
+Route::get("user-info/{user_info}/confirm", [UserInfoController::class, "confirm"])->name("user-info.confirm");
+
 Route::resource("events", EventController::class)->only(['index', 'show']);
 Route::resource("events.booking", EventBookingController::class)->only(['create', 'store']);
 Route::resource("booking", EventBookingController::class)->only(['show', 'destroy']);
 Route::resource("user-info", UserInfoController::class)->only(['show', 'create', 'store', 'edit', 'update']);
-
-Route::get("user-info/{user_info}/confirm", [UserInfoController::class, "confirm"])->name("user-info.confirm");
 
 Route::get("akce", function () {return Inertia::render('Event/Tmp');})->name('akce');
 Route::get("akce/pohadkovy-les", function () {return Inertia::render('Event/TmpLes');})->name('akce.pohadkovy-les');

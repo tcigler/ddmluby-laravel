@@ -5,7 +5,8 @@ import {Link} from "@inertiajs/vue3";
 
 defineProps({
     event: Object,
-    hasTimeSlots: Boolean,
+    can_register: Boolean,
+    registration_later: String,
 });
 
 </script>
@@ -24,10 +25,18 @@ defineProps({
                 <h2>Program</h2>
                 <p>{{event.program}}</p>
             </template>
-            <Link v-if="hasTimeSlots" class="btn btn-green min-w-64 mt-4"
-                  :href="route('events.booking.create', event.id)"><i class="pi pi-check-circle"></i>&nbsp;Zaregistrujte
-                se
-            </Link>
+            <template v-if="can_register">
+                <Message v-if="registration_later">Registrace bude spuštěna {{
+                        dayjs(registration_later).format("L LT")
+                    }}
+                </Message>
+                <Message v-else-if="!event.registration_open">Registrace na akci byla dočasně pozastavena</Message>
+                <Link v-else class="btn btn-green min-w-64 mt-4"
+                      :href="route('events.booking.create', event.id)">
+                    <i class="pi pi-check-circle"></i>&nbsp;Zaregistrujte se
+                </Link>
+            </template>
+            <p class="mt-4 font-bold" v-else>Budeme se na vás těšit na shledanou!</p>
         </article>
     </div>
 </template>

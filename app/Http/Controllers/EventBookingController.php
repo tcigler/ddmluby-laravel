@@ -132,4 +132,8 @@ class EventBookingController extends Controller {
             'attendeesCount' => ["Event time slot has only " . $remainingCapacity . " remaining capacity"]
         ]);
     }
+
+    public function cleanup() {
+        return EventBooking::where("expire_at", "<", Carbon::now())->delete();
+    }
 }
