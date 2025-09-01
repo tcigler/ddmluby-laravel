@@ -28,15 +28,16 @@ Pro dokončení registrace prosím klikněte na tlačítko níže:
     Potvrdit registraci
 </x-mail::button>
 
-Pokud tlačítko nefunguje, zkopírujte tento odkaz do prohlížeče:
-{{ $verificationLink }}
+<sub>Pokud tlačítko nefunguje, zkopírujte tento odkaz do prohlížeče:</sub>
+<sub>{{ $verificationLink }}</sub>
 
 Pro zobrazení a úpravu vaší registrace použijte následující odkaz:
 
 <x-mail::button :url="$bookingLink">
     Zobrazit registraci
 </x-mail::button>
-{{ $bookingLink }}
+
+<sub>{{ $bookingLink }}</sub>
 
 ---
 
