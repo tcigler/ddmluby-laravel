@@ -3,7 +3,7 @@
 
 úspěšně jste se zaregistroval(a) na událost: **{{ $event->title }}**
 
-📅 Datum a čas: {{ $eventTimeSlot->time->format('j. n. Y h:m') }}
+📅 Datum a čas: {{ $eventTimeSlot->time->format('j. n. Y H:i') }}
 
 📍 Místo: {{ $event->location }}
 
