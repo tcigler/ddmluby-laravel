@@ -17,15 +17,19 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get("booking/cleanup", [EventBookingController::class, "cleanup"])->name('booking.cleanup');
-Route::get("user-info/{user_info}/confirm", [UserInfoController::class, "confirm"])->name("user-info.confirm");
+Route::get(__("routes.user-info") . "/{user_info}/" . __("routes.confirm"), [UserInfoController::class, "confirm"])->name("user-info.confirm");
 
-Route::resource("events", EventController::class)->only(['index', 'show']);
-Route::resource("events.booking", EventBookingController::class)->only(['create', 'store']);
-Route::resource("booking", EventBookingController::class)->only(['show', 'destroy']);
-Route::resource("user-info", UserInfoController::class)->only(['show', 'create', 'store', 'edit', 'update']);
+Route::resource(__("routes.events"), EventController::class)->only(['index', 'show'])
+    ->names("events")->parameters([__("routes.events") => 'event']);
+Route::resource(__("routes.events.booking"), EventBookingController::class)->only(['create', 'store'])
+    ->names("events.booking")->parameters([__("routes.events") => 'event']);
+Route::resource(__("routes.booking"), EventBookingController::class)->only(['show', 'destroy'])
+    ->names("booking")->parameters([__("routes.booking") => 'booking']);
+Route::resource(__("routes.user-info"), UserInfoController::class)->only(['show', 'create', 'store', 'edit', 'update'])
+    ->names("user-info")->parameters([__("routes.user-info") => 'user-info']);
 
-Route::get("akce", function () {return Inertia::render('Event/Tmp');})->name('akce');
-Route::get("akce/pohadkovy-les", function () {return Inertia::render('Event/TmpLes');})->name('akce.pohadkovy-les');
+//Route::get("akce", function () {return Inertia::render('Event/Tmp');})->name('akce');
+//Route::get("akce/pohadkovy-les", function () {return Inertia::render('Event/TmpLes');})->name('akce.pohadkovy-les');
 
 Route::middleware([
     'auth:sanctum',

@@ -29,8 +29,8 @@ const logout = () => {
 
             <nav class="flex gap-4 bg-primary-600 text-gray-100 [&>*]:p-2 [&>*]:hover:bg-primary-500">
                 <Link :href="route('home')">Domů</Link>
-              <Link :href="route('events.index')">T</Link>
-                <Link :href="route('akce')">Akce</Link>
+                <Link :href="route('events.index')">Akce</Link>
+                <!--                <Link :href="route('akce')">Akce</Link>-->
             </nav>
 
             <!-- Page Content -->

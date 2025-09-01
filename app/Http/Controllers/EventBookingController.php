@@ -47,7 +47,7 @@ class EventBookingController extends Controller {
         $attendeesRegCount = $attendees["attendeesCount"];
         if ($attendeesRegCount != count($attendees["attendeeNote"])) {
             throw ValidationException::withMessages([
-                'attendeeNote' => ['The count field must match the number of items.'],
+                'attendeeNote' => ['Všechna jména účastníků musí být vyplněna'],
             ]);
         }
 
