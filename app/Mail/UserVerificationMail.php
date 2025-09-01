@@ -27,8 +27,8 @@ class UserVerificationMail extends Mailable {
         $this->event = $event;
         $this->eventBooking = $eventBooking;
         $this->eventTimeSlot = $eventTimeSlot;
-        $this->verificationLink = url('/user-info/' . $this->userInfo->id . '/confirm?code=' . $this->userInfo->verification_code);
-        $this->bookingLink = url('/booking/' . $this->eventBooking->uuid);
+        $this->verificationLink = url('/osobni-udaje/' . $this->userInfo->id . '/potvrdit?code=' . $this->userInfo->verification_code);
+        $this->bookingLink = url('/registrace/' . $this->eventBooking->uuid);
     }
 
     /**
