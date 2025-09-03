@@ -17,6 +17,10 @@ class AdminController extends Controller {
         return Inertia::render("Admin/Index");
     }
 
+    public function bookingsIndex(\Request $request) {
+
+    }
+
     public function previewMail() {
         $userInfo = UserInfo::first(); // or factory/fake data
 

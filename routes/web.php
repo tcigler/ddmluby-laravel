@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\EventBookingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserInfoController;
@@ -35,7 +36,9 @@ Route::resource(__("routes.user-info"), UserInfoController::class)->only(['show'
 
 Route::prefix('admin')->name('admin.')->middleware("auth")->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
-    Route::get('/preview-mail', [AdminController::class, 'previewMail'])->name('preview-mail');
+    Route::get('preview-mail', [AdminController::class, 'previewMail'])->name('preview-mail');
+    Route::get("events", [BookingController::class, 'eventsIndex'])->name('events.index');
+    Route::get("events/{event}", [BookingController::class, 'eventShow'])->name('events.show');
 });
 
 Route::middleware([

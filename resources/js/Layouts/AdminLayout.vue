@@ -13,7 +13,7 @@ const props = defineProps({
       <Link href="/"><i class="pi pi-arrow-up-left"></i></Link>
       <span class="text-white px-2">|</span>
         <span class="text-sm text-gray-600">Home</span>
-<!--      <Link :href="route('bus.index')+'#foto'">Fotogalerie</Link>-->
+        <Link :href="route('admin.events.index')">Akce</Link>
 <!--      <Link :href="route('admin.tour.index')">Zájezdy</Link>-->
 <!--      <Link :href="route('admin.booking.index')">Rezervace</Link>-->
 <!--      <Link :href="route('admin.photo-category.show', 'gallery')">Fotogalerie</Link>-->

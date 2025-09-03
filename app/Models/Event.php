@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Event extends Model {
     use HasFactory, Sluggable, SluggableScopeHelpers;
@@ -25,6 +26,10 @@ class Event extends Model {
 
     public function timeSlots(): HasMany {
         return $this->hasMany(EventTimeSlot::class);
+    }
+
+    public function eventBookings(): hasManyThrough {
+        return $this->hasManyThrough(EventBooking::class, EventTimeSlot::class);
     }
 
     protected $dates = [
