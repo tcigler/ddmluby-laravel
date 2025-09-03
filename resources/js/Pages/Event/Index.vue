@@ -10,9 +10,9 @@ defineProps({
 </script>
 
 <template>
-    <DataTable :value="events">
+    <DataTable :value="events" table-class="whitespace-nowrap">
         <Column field="title" header="Akce"></Column>
-        <Column field="location" header="Místo"></Column>
+        <Column field="location" header="Místo" class="whitespace-normal"></Column>
         <Column header="Začátek" field="start">
             <template #body="slotProps">
                 {{ dayjs(slotProps.data.start).format("DD. MM. YYYY, HH:mm") }}
