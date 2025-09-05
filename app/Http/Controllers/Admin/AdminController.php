@@ -4,21 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\UserVerificationMail;
-use App\Models\Booking;
 use App\Models\Event;
 use App\Models\EventBooking;
 use App\Models\EventTimeSlot;
-use App\Models\Tour;
 use App\Models\UserInfo;
 use Inertia\Inertia;
 
 class AdminController extends Controller {
     public function index() {
         return Inertia::render("Admin/Index");
-    }
-
-    public function bookingsIndex(\Request $request) {
-
     }
 
     public function previewMail() {

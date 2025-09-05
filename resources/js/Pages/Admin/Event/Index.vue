@@ -27,6 +27,8 @@ defineProps({
             <template #body="slotProps">
                 <Link :href="route('admin.events.show', slotProps.data.id)"><i
                     class="pi pi-eye text-2xl text-primary-600"></i></Link>
+                <Link :href="route('admin.events.overview', slotProps.data.id)"><i
+                    class="pi pi-print text-2xl text-primary-600"></i></Link>
             </template>
         </Column>
     </DataTable>

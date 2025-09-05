@@ -25,6 +25,17 @@ class BookingController extends Controller {
         ]);
     }
 
+    public function eventOverview(Event $event) {
+        $timeSlots = $event->timeSlots()->orderBy("event_time_slots.time")
+            ->with('bookings')
+            ->with('bookings.attendees')
+            ->with('bookings.userInfo')
+            ->get();
+
+        return inertia("Admin/Event/Overview", ['event' => $event, 'eventTimeSlots' => $timeSlots]);
+    }
+
+
     public function index() {
 
     }

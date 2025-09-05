@@ -39,6 +39,7 @@ Route::prefix('admin')->name('admin.')->middleware("auth")->group(function () {
     Route::get('preview-mail', [AdminController::class, 'previewMail'])->name('preview-mail');
     Route::get("events", [BookingController::class, 'eventsIndex'])->name('events.index');
     Route::get("events/{event}", [BookingController::class, 'eventShow'])->name('events.show');
+    Route::get("events/{event}/overview", [BookingController::class, 'eventOverview'])->name('events.overview');
 });
 
 Route::middleware([
